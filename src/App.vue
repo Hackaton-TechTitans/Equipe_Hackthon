@@ -76,11 +76,18 @@ import estados from './estados';
     border: 1px solid rgb(135, 202, 222);
   }
   h3{
+    font-size: 2rem;
     text-align: center;
     align-items: center;
     justify-content: center;
   }
-
-
-
+  button{
+    margin-top: 10px;
+    background-image: linear-gradient(90deg, rgba(135, 202, 222, 1) 0%, rgb(103, 191, 218) 100%);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 </style>
