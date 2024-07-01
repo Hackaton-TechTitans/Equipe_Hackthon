@@ -1,85 +1,75 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
+import { ref } from 'vue';
+import estados from './estados';
+
+
+
 </script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <form class="form">
+      <h3>Formulario Vue</h3>
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" v-model="nome" required>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" v-model="email" required>
 
-  <RouterView />
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha" v-model="senha" required>
+
+      <label for="senha_confirmacao">Confirmação de Senha</label>
+      <input type="password" id="senha_confirmacao" name="senha_confirmacao" v-model="senha_confirmacao" required>
+
+      <label for="nascimento">Data de Nascimento</label>
+      <input type="date" id="nascimento" name="nascimento" v-model="nascimento" required>
+
+      <label for="endereco">Endereço</label>
+      <input type="text" id="endereco" name="endereco" v-model="endereco" required>
+
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" name="cidade" v-model="cidade" required>
+
+      <label for="estado">Estado</label>
+      <select v-model="estado">
+        <option v-for="estado in estados" :value="estado.sigla">{{ estado.nome }}</option>
+      </select>
+
+      <label for="hobbies">Hobbies</label>
+      <input type="text" id="hobbies" name="hobbies" v-model="hobbies" required>
+      <label for="biografia">Biografia</label>
+      <textarea id="biografia" name="biografia" v-model="biografia" required></textarea>
+
+
+      <button type="submit">Enviar</button>
+
+
+    </form>
 </template>
+<style>
+  
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
+  body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(35, 33, 44);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+  .form {
+    color: rgb(217, 217, 217);
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid rgb(135, 202, 222);
+    border-radius: 15px;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
