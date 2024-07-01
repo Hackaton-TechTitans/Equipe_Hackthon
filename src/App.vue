@@ -69,6 +69,17 @@ import estados from './estados';
     border: 2px solid rgb(135, 202, 222);
     border-radius: 15px;
   }
+  input, select, textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(135, 202, 222);
+  }
+  h3{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
 
 
 
