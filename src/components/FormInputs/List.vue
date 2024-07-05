@@ -82,8 +82,8 @@ defineExpose({
             </div>
         </div>
         <div class="input-div">
-            <input @keydown.space.prevent="additem" v-model="additemBtn" v-bind:name="name" class="input" type="text"
-                required></input>
+            <input @keydown.enter.prevent="additem" v-model="additemBtn" v-bind:name="name" class="input" type="text"
+                required>
             <label v-bind:for="name" class="input-label">Adicionar item</label>
         </div>
         <div class="errormessage" v-bind:hidden="!error_check">
@@ -205,4 +205,5 @@ select {
     display: flex;
     align-items: center;
 }
+
 </style>

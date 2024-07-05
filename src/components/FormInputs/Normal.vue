@@ -33,8 +33,20 @@ const error_check = ref(false);
 const error_message = ref('');
 
 function Verifica() {
+    if(main.value.length < 1){
+        error('Precisa de alguma coisa');
+        return false;
+    }
+
+    if(props.type == 'email'){
+        if(!main.value.includes('@')){
+            error('Precisa ser um email');
+            return false;
+        }
+    }
+
     if (props.needVerify) {
-        if (verification.value != main.value && verification.value.length > 0) {
+        if (verification.value != main.value) {
             error('Os campos não são iguais!')
             return false;
         }

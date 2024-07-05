@@ -23,24 +23,26 @@ const titles = {
 };
 const descricao = {
     0: 'Insira seu nome',
-    1: 'Insira sua data de nascimento',
-    2: 'Insira seu endereço',
-    3: 'Insira seus hobbies',
-    4: 'Insira suas linguagens de programação',
-    5: 'Escreva sua biografia',
+    1: 'Insira seu email',
+    2: 'Insira sua senha',
+    3: 'Insira sua data de nascimento',
+    4: 'Insira seu endereço',
+    5: 'Escreva seus hobbies',
+    6: 'Insira sua linguagens de programação',
+    7: 'Insira sua biografia',
 };
 
 emits('descricao', descricao[paginaAtual.value]);
 
-const nome = ref(null);
-const sobrenome = ref(null);
-const email = ref(null);
-const password = ref(null);
-const birthdateref = ref(null);
-const enderecoref = ref(null);
-const listadehobbies = ref(null);
-const listadelinguagens = ref(null);
-const biografia = ref(null);
+const nome = ref();
+const sobrenome = ref();
+const email = ref();
+const password = ref();
+const birthdateref = ref();
+const enderecoref = ref();
+const listadehobbies = ref();
+const listadelinguagens = ref();
+const biografia = ref();
 
 const verificacoes = {
     0: nome,
@@ -53,9 +55,13 @@ const verificacoes = {
     7: biografia,
 };
 
-onMounted(() => {
-    console.log(verificacoes[paginaAtual.value].value)
-});
+function proximaPagina() {
+    if(verificacoes[paginaAtual.value].value.Verifica()) {
+        paginaAtual.value++;
+        emits('descricao', descricao[paginaAtual.value]);
+    }
+}
+
 function paginaAnterior() {
     if (paginaAtual.value > 0) {
         paginaAtual.value--;
@@ -68,23 +74,23 @@ function paginaAnterior() {
 <template>
     <div class="form-contents">
 
-        <normal v-if="paginaAtual === 0" v-model="nome" type="text" name="Nome" required=true />
-        <normal v-if="paginaAtual === 0" v-model="sobrenome" type="text" name="Sobrenome (opcional)" required=false />
+        <normal v-if="paginaAtual === 0" ref="nome" type="text" name="Nome" required=true />
+        <normal v-if="paginaAtual === 0" ref="sobrenome" type="text" name="Sobrenome (opcional)" required=false />
 
-        <normal v-if="paginaAtual === 1" v-model="email" type="email" name="E-mail" required=true />
+        <normal v-if="paginaAtual === 1" ref="email" type="email" name="E-mail" required=true />
 
-        <normal v-if="paginaAtual === 2" v-model="password" type="password" name="Senha" needVerify=true minLenght=8
+        <normal v-if="paginaAtual === 2" ref="password" type="password" name="Senha" needVerify=true minLegth=8
             required=true />
 
-        <birthdate v-if="paginaAtual === 3" v-model="birthdateref" minAge=18 maxAge=60 />
+        <birthdate v-if="paginaAtual === 3" ref="birthdateref" minAge=18 maxAge=60 />
 
-        <endereco v-if="paginaAtual === 4" v-model="enderecoref" />
+        <endereco v-if="paginaAtual === 4" ref="enderecoref" />
 
-        <list v-if="paginaAtual === 5" v-model="listadehobbies" name="Lista de Hobbies" />
+        <list v-if="paginaAtual === 5" ref="listadehobbies" name="Lista de Hobbies" />
 
-        <list v-if="paginaAtual === 6" v-model="listadelinguagens" name="Lista de Linguagens" />
+        <list v-if="paginaAtual === 6" ref="listadelinguagens" name="Lista de Linguagens" />
 
-        <textarea v-if="paginaAtual === 7" v-model="biografia" name="Biografia" />
+        <textarea v-if="paginaAtual === 7" ref="biografia" name="Biografia" />
 
         <div class="input-div button-div">
             <button v-if="paginaAtual > 0" @click="paginaAnterior" class="button-avancar">Voltar</button>
