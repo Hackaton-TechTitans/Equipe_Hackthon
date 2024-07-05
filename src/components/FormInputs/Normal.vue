@@ -25,21 +25,46 @@ const props = defineProps({
         required: false,
         default: 100,
     },
-});
+    code: {
+        type: String,
+        required: true,
+    },
+    required: {
+        type: Boolean,
+        required: false,
+        default: true,
+    },
+    Values: {
+        type: Object,
+        required: false,
+        default: {
+            main: '',
+            verification: ''
+        }
+    }
 
-const main = ref('');
-const verification = ref('');
+});
+const main = ref((props.Values.main) ? props.Values.main : '');
+const verification = ref((props.Values.main) ? props.Values.main : '');
 const error_check = ref(false);
 const error_message = ref('');
 
+
+
 function Verifica() {
-    if(main.value.length < 1){
-        error('Precisa de alguma coisa');
-        return false;
+
+    if (main.value.length < 1 && props.required === 'false') {
+        return {
+            [props.code]: ''
+        };
     }
 
-    if(props.type == 'email'){
-        if(!main.value.includes('@')){
+    if (main.value.length < 1 && props.required === 'true') {
+        error('Preencha o campo!');
+        return false;
+    }
+    if (props.type == 'email') {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(main.value)) {
             error('Precisa ser um email');
             return false;
         }
@@ -59,8 +84,11 @@ function Verifica() {
         error('O campo deve ter no máximo ' + props.maxLength + ' caracteres!');
         return false;
     }
+
     removeError();
-    return main.value;
+    return {
+        [props.code]: main.value
+    };
 }
 
 function error(message) {
@@ -90,8 +118,7 @@ function removeError() {
     });
 }
 
-
-watch(main, () => {
+watch(main, (newaa) => {
     removeError()
 });
 watch(verification, () => {
@@ -99,7 +126,7 @@ watch(verification, () => {
 });
 
 defineExpose({
-    Verifica,
+    Verifica
 });
 </script>
 <template>
@@ -108,12 +135,13 @@ defineExpose({
         <label v-bind:for="name" class="input-label">{{ name }}</label>
     </div>
     <div v-if="props.needVerify" class="input-div">
-        <input v-model="verification" v-bind:name="name" v-bind:id="name + '-verify'" class="input" v-bind:type="type" required>
+        <input v-model="verification" v-bind:name="name" v-bind:id="name + '-verify'" class="input" v-bind:type="type"
+            required>
         <label v-bind:for="name" class="input-label">{{ name }} (Digite novamente)</label>
     </div>
     <div class="errormessage" v-bind:hidden="!error_check">
         <p class="error">{{ error_message }}</p>
-    </div> 
+    </div>
 </template>
 <style scoped>
 .input-div {
@@ -164,7 +192,8 @@ defineExpose({
     padding: 0 0.5em;
     color: rgb(209, 82, 50);
 }
-.error{
+
+.error {
     color: red !important;
     margin: 0;
     border-color: red !important;

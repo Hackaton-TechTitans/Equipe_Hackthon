@@ -1,24 +1,35 @@
 <script setup>
 import { ref, watch } from 'vue';
-import estados from '@/components/utils/estados.js';
 const props = defineProps({
     name: {
         type: String,
         required: true,
-    }
+    },
+    code: {
+        type: String,
+        required: true,
+    },
+    Values: {
+        type: Object,
+        default: () => ({
+            area: '',
+        }),
+    },
 });
 
-const area = ref('');
+const area = ref(props.Values.area);
 const error_check = ref(false);
 const error_message = ref('');
 
 function Verifica() {
     if (area.value === '') {
-        error('Preencha todos os campos!');
+        error('Preencha o campo de texto!');
         return false;
-    }
+    };
     removeError();
-    return true;
+    return {
+        [props.code]: area.value
+    };
 }
 
 function error(message) {
@@ -61,7 +72,7 @@ defineExpose({
     <div class="list-div">
         <div class="input-div">
             <textarea v-model="area" v-bind:name="name" class="input" type="text" resize=false required></textarea>
-            <label v-bind:for="name" class="input-label">Endereço</label>
+            <label v-bind:for="name" class="input-label">{{ name }}</label>
         </div>
         <div class="errormessage" v-bind:hidden="!error_check">
             <p class="error">{{ error_message }}</p>

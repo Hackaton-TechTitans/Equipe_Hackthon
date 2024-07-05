@@ -2,14 +2,28 @@
 import { ref, watch } from 'vue';
 import estados from '@/components/utils/estados.js';
 
-const endereco = ref('');
-const cidade = ref('');
-const estado = ref('');
+const props = defineProps({
+    Values: {
+        type: Object,
+        default: () => ({
+            endereco: '',
+            cidade: '',
+            estado: '',
+        }),
+    },
+});
+
+const endereco = ref(props.Values.endereco);
+const cidade = ref(props.Values.cidade);
+const estado = ref((props.Values.estado)? props.Values.estado : '');
+
 const error_check = ref(false);
 const error_message = ref('');
 
 function Verifica() {
-    if(endereco.value === '' || cidade.value === '' || estado.value === '') {
+    console.log(estado.value)
+
+    if (endereco.value === '' || cidade.value === '' || estado.value === '') {
         error('Preencha todos os campos!');
         return false;
     }
@@ -17,7 +31,7 @@ function Verifica() {
     return {
         endereco: endereco.value,
         cidade: cidade.value,
-        estado: estado.value,
+        estado: estado.value
     };
 }
 

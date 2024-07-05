@@ -1,18 +1,27 @@
 <script setup>
 import { ref, watch } from 'vue';
-import estados from '@/components/utils/estados.js';
 const props = defineProps({
     name: {
         type: String,
         required: true,
-    }
+    },
+    code: {
+        type: String,
+        required: true,
+    },
+    Values: {
+        type: Array,
+        required: false,
+        default: {
+            main: [],
+        },
+    },
 });
-
-const items = ref([]);
 
 const additemBtn = ref('');
 const error_check = ref(false);
 const error_message = ref('');
+const items = ref((props.Values.main) ? props.Values.main : []);
 
 function Verifica() {
     if (items.value.length === 0) {
@@ -20,7 +29,9 @@ function Verifica() {
         return false;
     }
     removeError();
-    return items.value;
+    return {
+        [props.code]: items.value
+    };
 }
 
 function error(message) {
@@ -85,6 +96,8 @@ defineExpose({
             <input @keydown.enter.prevent="additem" v-model="additemBtn" v-bind:name="name" class="input" type="text"
                 required>
             <label v-bind:for="name" class="input-label">Adicionar item</label>
+            <button @click="additem" class="button-avancar">Adicionar</button>
+
         </div>
         <div class="errormessage" v-bind:hidden="!error_check">
             <p class="error">{{ error_message }}</p>
@@ -197,13 +210,21 @@ select {
     flex-wrap: wrap;
     align-items: center;
 }
-.tag{
-    background-color: #e0e0e0;
-    border-radius: 2px;
+
+.tag {
+    background-color: rgb(209, 70, 50);
+    border-radius: 6px;
     padding: 2px 8px;
     margin: 2px;
+    text-align: center;
     display: flex;
     align-items: center;
+    line-break: anywhere;
 }
 
+.delete-btn {
+    border: none;
+    margin-left: 4px;
+    border-radius: 3px;
+}
 </style>

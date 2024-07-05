@@ -17,14 +17,13 @@ onMounted(() => {
         shape.style.background = `rgba(255,255,255,${Math.random() * 0.1 + 0.05})`;
         background.appendChild(shape);
     }
-}); 
+});
 
 </script>
 <template>
     <div class="background"></div>
 </template>
 <style>
-
 .background {
     position: absolute;
     top: 0;
@@ -32,7 +31,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: linear-gradient(35deg,rgb(108,33,98), rgb(209, 82, 50));
+    background: linear-gradient(35deg, rgb(108, 33, 98), rgb(209, 82, 50));
 }
 
 

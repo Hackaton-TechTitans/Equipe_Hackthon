@@ -1,127 +1,13 @@
 <script setup>
 import Background from './components/Background.vue';
 import { ref } from 'vue';
-import Form from './components/FormBuilder.vue';
+import formMaker from './components/FormBuilder.vue';
 
 const descricao = ref("Descrição");
 
-const formPages = {
-    0: {
-        title: 'Bem-vindo',
-        description: 'Insira seu nome',
-        fields: [
-            {
-                model: 'normal',
-                type: 'text',
-                name: 'Nome',
-                required: true,
-                code: 'nome',
-            },
-            {
-                model: 'normal',
-                type: 'text',
-                name: 'Sobrenome (opcional)', 
-                required: false,
-                code: 'sobrenome',
-            },
-        ],
-    },
-    1: {
-        title: 'Endereço de e-mail',
-        description: 'Insira seu endereço de e-mail',
-        fields: [
-            {
-                model: 'normal',
-                type: 'email',
-                name: 'E-mail',
-                required: true,
-                code: 'email',
-            },
-        ],
-    },
-    2: {
-        title: 'Senha',
-        description: 'Insira sua senha',
-        fields: [
-            {
-                model: 'normal',
-                type: 'password',
-                name: 'Senha',
-                needVerify: true,
-                minLenght: 8,
-                required: true,
-                code: 'senha',
-            },
-        ],
-    },
-    3: {
-        title: 'Data de nascimento',
-        description: 'Insira sua data de nascimento',
-        fields: [
-            {
-                model: 'birthdate',
-                name: 'Data de nascimento',
-                required: true,
-                minAge: 18,
-                maxAge: 60,
-                code: 'nascimento',
-            },
-        ],
-    },
-    4: {
-        title: 'Endereço',
-        description: 'Insira seu endereço',
-        fields: [
-            {
-                model: 'endereco',
-                name: 'Endereço',
-                required: true,
-                code: 'endereco',
-            },
-            
-        ],
-    },
-    5: {
-        title: 'Lista de Hobbies',
-        description: 'Insira seus Hobbies',
-        fields: [
-            {
-                model: 'list',
-                name: 'Idiomas',
-                required: true,
-                code: 'idiomas',
-            },
-        ],
-    },
-    6: {
-        title: 'Lista de Linguagens',
-        description: 'Insira suas linguagens de programação',
-        fields: [
-            {
-                model: 'list',
-                name: 'Linguagens',
-                required: true,
-                code: 'linguagens',
-            },
-        ]
-    },
-    7: {
-        title: 'Biografia',
-        description: 'Escreva sua biografia',
-        fields: [
-            {
-                model: 'textarea',
-                name: 'Biografia',
-                required: true,
-                code: 'biografia',
-            },
-        ],
-    },
-    }
-
-    function Descricao(desc) {
-        descricao.value = String(desc);
-    }
+function Descricao(desc) {
+    descricao.value = String(desc);
+}
 
 </script>
 <template>
@@ -141,15 +27,13 @@ const formPages = {
             </div>
         </div>
         <div class="form">
-            <Form :form="formPages" @descricao="Descricao" />
+            <formMaker @descricao="Descricao" />
         </div>
     </div>
-</template>a
+</template>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-
 
 html,
 body {
@@ -162,8 +46,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
 
 .content {
     display: flex;

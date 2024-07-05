@@ -1,16 +1,32 @@
 <script setup>
-import { defineProps, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import meses from '@/components/utils/meses.js';
 const props = defineProps({
     minAge: {
         type: Number,
         default: 18,
     },
+    maxAge: {
+        type: Number,
+        default: 100,
+    },
+    Values: {
+        type: Object,
+        required: false,
+        default: () => ({
+            main: null,
+        }),
+    },
+    code: {
+        type: String,
+        required: true,
+    },
 });
 
-const dia = ref('');
-const mes = ref('');
-const ano = ref('');
+
+const dia = ref((props.Values.main) ? new Date(props.Values.main).getDate() : '');
+const mes = ref((props.Values.main) ? new Date(props.Values.main).getMonth() : '');
+const ano = ref((props.Values.main) ? new Date(props.Values.main).getFullYear() : '');
 const error_check = ref(false);
 const error_message = ref('');
 
@@ -18,24 +34,28 @@ function Verifica() {
     if (dia.value.length < 1 || mes.value.length < 1 || ano.value.length < 1 || dia.value > 31 || mes.value > 12 || ano.value > new Date().getFullYear()) {
         error('Preencha todos os campos!');
         return false;
-    }
-    if(isNaN(dia.value) || isNaN(ano.value)){
+    };
+    if (isNaN(dia.value) || isNaN(ano.value)) {
         error('Coloque números válidos!');
         return false;
-    }
+    };
 
-    const data = new Date(ano.value, mes.value - 1, dia.value);
+    const data = new Date(ano.value, mes.value, dia.value);
 
     const idade = new Date().getFullYear() - data.getFullYear() //lembrar de fazer mais precisamente
 
     if (idade < props.minAge) {
         error('Você deve ter no mínimo ' + props.minAge + ' anos!');
         return false;
-    } else {
-        removeError();
-        return data;
-    }
-
+    };
+    if (idade > props.maxAge) {
+        error('Você deve ter no máximo ' + props.maxAge + ' anos!');
+        return false;
+    };
+    removeError();
+    return {
+        [props.code]: data
+    };
 }
 
 function error(message) {
