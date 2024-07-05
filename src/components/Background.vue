@@ -1,12 +1,5 @@
 <script setup>
 
-import { defineProps } from 'vue';
-
-defineProps({
-    title: String,
-    description: String,
-});
-
 import { onMounted } from 'vue';
 
 onMounted(() => {

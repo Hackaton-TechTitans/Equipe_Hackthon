@@ -1,6 +1,6 @@
 <script setup>
 
-import { defineProps, defineEmits, ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import normal from './FormInputs/Normal.vue';
 import birthdate from './FormInputs/Birthdate.vue';
 import endereco from './FormInputs/Endereco.vue';

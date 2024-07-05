@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import estados from '@/components/utils/estados.js';
 const props = defineProps({
     name: {
