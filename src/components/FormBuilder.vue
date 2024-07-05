@@ -13,14 +13,6 @@ const emits = defineEmits(['descricao']);
 
 const paginaAtual = ref(0);
 
-const titles = {
-    0: 'Nome',
-    1: 'Data de Nascimento',
-    2: 'Endereço',
-    3: 'Lista de Hobbies',
-    4: 'Lista de Linguagens',
-    5: 'Biografia',
-};
 const descricao = {
     0: 'Insira seu nome',
     1: 'Insira seu email',
