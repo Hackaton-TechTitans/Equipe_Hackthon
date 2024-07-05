@@ -19,6 +19,10 @@ function Verifica() {
         error('Preencha todos os campos!');
         return false;
     }
+    if(isNaN(dia.value) || isNaN(ano.value)){
+        error('Coloque números válidos!');
+        return false;
+    }
 
     const data = new Date(ano.value, mes.value - 1, dia.value);
 
