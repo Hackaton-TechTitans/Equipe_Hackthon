@@ -1,6 +1,6 @@
 <script setup>
 
-import { defineProps, defineEmits, ref, computed } from 'vue';
+import { defineProps, defineEmits, ref, onMounted } from 'vue';
 import normal from './FormInputs/Normal.vue';
 import birthdate from './FormInputs/Birthdate.vue';
 import endereco from './FormInputs/Endereco.vue';
@@ -36,19 +36,26 @@ const nome = ref(null);
 const sobrenome = ref(null);
 const email = ref(null);
 const password = ref(null);
-const birthdate = ref(null);
-const endereco = ref(null);
+const birthdateref = ref(null);
+const enderecoref = ref(null);
 const listadehobbies = ref(null);
 const listadelinguagens = ref(null);
 const biografia = ref(null);
 
+const verificacoes = {
+    0: nome,
+    1: email,
+    2: password,
+    3: birthdateref,
+    4: enderecoref,
+    5: listadehobbies,
+    6: listadelinguagens,
+    7: biografia,
+};
 
-
-
-function proximaPagina() {
-    //chama a função de verificação da página atual
-
-}
+onMounted(() => {
+    console.log(verificacoes[paginaAtual.value].value)
+});
 function paginaAnterior() {
     if (paginaAtual.value > 0) {
         paginaAtual.value--;
@@ -56,38 +63,38 @@ function paginaAnterior() {
     }
 }
 
-
-
-
 </script>
 
 <template>
     <div class="form-contents">
 
-        <normal v-if="paginaAtual === 0" ref="nome"  type="text" name="Nome" required=true />
-        <normal v-if="paginaAtual === 0" ref="sobrenome" type="text" name="Sobrenome (opcional)" required=false />
+        <normal v-if="paginaAtual === 0" v-model="nome" type="text" name="Nome" required=true />
+        <normal v-if="paginaAtual === 0" v-model="sobrenome" type="text" name="Sobrenome (opcional)" required=false />
 
-        <normal v-if="paginaAtual === 1" ref="email" type="email" name="E-mail" required=true  />
+        <normal v-if="paginaAtual === 1" v-model="email" type="email" name="E-mail" required=true />
 
-        <normal v-if="paginaAtual === 2" ref="password" type="password" name="Senha" needVerify=true minLenght=8 required=true   />
+        <normal v-if="paginaAtual === 2" v-model="password" type="password" name="Senha" needVerify=true minLenght=8
+            required=true />
 
-        <birthdate v-if="paginaAtual === 3" ref="birthdate" minAge=18 maxAge=60 /> 
+        <birthdate v-if="paginaAtual === 3" v-model="birthdateref" minAge=18 maxAge=60 />
 
-        <endereco v-if="paginaAtual === 4" ref="endereco" />
-        
-        <list v-if="paginaAtual === 5" ref="listadehobbies" name="Lista de Hobbies" />
+        <endereco v-if="paginaAtual === 4" v-model="enderecoref" />
 
-        <list v-if="paginaAtual === 6" ref="listadelinguagens" name="Lista de Linguagens" />
+        <list v-if="paginaAtual === 5" v-model="listadehobbies" name="Lista de Hobbies" />
 
-        <textarea v-if="paginaAtual === 7" ref="biografia" name="Biografia" />
+        <list v-if="paginaAtual === 6" v-model="listadelinguagens" name="Lista de Linguagens" />
+
+        <textarea v-if="paginaAtual === 7" v-model="biografia" name="Biografia" />
 
         <div class="input-div button-div">
-            <button @click="procimaPagina" class="button-avancar">Avançar</button>
+            <button v-if="paginaAtual > 0" @click="paginaAnterior" class="button-avancar">Voltar</button>
+
+            <button @click="proximaPagina" class="button-avancar">Avançar</button>
+
         </div>
     </div>
 </template>
 <style>
-
 .form {
     display: flex;
     width: 100%;
@@ -121,6 +128,7 @@ function paginaAnterior() {
     padding: 1rem 1.5rem;
     border-radius: 24px;
     font-size: 1rem;
+    margin: auto 10px;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -143,5 +151,4 @@ function paginaAnterior() {
     outline-width: 2px;
     outline-offset: 2px;
 }
-
 </style>
