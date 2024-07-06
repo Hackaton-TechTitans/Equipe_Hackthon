@@ -12,12 +12,12 @@ const props = defineProps({
     Values: {
         type: Object,
         default: () => ({
-            area: '',
+            text: '',
         }),
     },
 });
 
-const area = ref(props.Values.area);
+const area = ref(props.Values.text);
 const error_check = ref(false);
 const error_message = ref('');
 

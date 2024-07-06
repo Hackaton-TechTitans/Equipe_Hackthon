@@ -108,7 +108,7 @@ function paginaAnterior() {
 
     <imagemform v-if="paginaAtual === 7" ref="imagem" :Values="{imagem: form.imagem}" name="Imagem de Perfil" code="imagem" />
 
-    <texts v-if="paginaAtual === 8" ref="biografia"  name="Biografia" code="biografia" />
+    <texts v-if="paginaAtual === 8" ref="biografia" :Values="{text: form.biografia}" name="Biografia" code="biografia" />
 
     <shows v-if="paginaAtual === 9" :data="form" />
 

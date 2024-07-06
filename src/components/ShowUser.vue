@@ -13,7 +13,8 @@ console.log(props.data.imagem)
 </script>
 <template>
     <div class='content-div'>
-        <h1>Informações do Usuário</h1>
+        <h1>Formulario Completo!</h1>
+        <h2>Informações do Usuário</h2>
         <div>
             <img v-if="data.imagem" v-bind:src="data.imagem" alt="Imagem"
                 style="width: 200px; height: 200px; border-radius: 50%; margin-left:4.5rem;">
