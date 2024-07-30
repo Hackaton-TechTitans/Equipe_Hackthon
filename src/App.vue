@@ -1,56 +1,71 @@
 <script setup>
+import { RouterView } from 'vue-router';
 import Background from './components/Background.vue';
-import { ref } from 'vue';
-import formMaker from './components/FormBuilder.vue';
 
-const descricao = ref("Descrição");
-
-function Descricao(desc) {
-    descricao.value = String(desc);
-}
 
 </script>
 <template>
     <Background />
+    <main>
     <div class="content">
         <div class="deco">
             <div class="deco-info">
                 <div class="logo">
-                    <img src="/logo.png" alt="logo" width="52px">
+                    <img src="https://avatars.githubusercontent.com/u/176500475?v=4" alt="logo" width="250px">
                 </div>
                 <div class="title">
-                    <h1>Form Dev-Web</h1>
-                </div>
-                <div class="desc">
-                    <p>{{ descricao }}</p>
+                    <h1>TechTitans</h1>
+                    <p>Grupo Hackaton</p>
                 </div>
             </div>
         </div>
-        <div class="form">
-            <formMaker @descricao="Descricao" />
-        </div>
+        <RouterView></RouterView>
     </div>
+</main>
 </template>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+
+.button-div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    top: 2rem;
+    margin-bottom: 2rem;
+}
+.button{
+    background-color: #d14632;
+    color: #f5f5f5;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 24px;
+    font-size: 1rem;
+    margin: auto 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color .15s cubic-bezier(.4,0,.2,1);
+    outline-color: #d14632;
+    text-decoration: none;
+}
+
 html,
 body {
     font-family: 'Inter', sans-serif;
-    height: 100%;
-    width: 100%;
     margin: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0;
+}
 .content {
     display: flex;
-    height: 500px;
-    width: 750px;
+    flex-direction: column;
+    align-items: center;
     border-radius: 16px;
     overflow: hidden;
     position: relative;
@@ -58,7 +73,7 @@ body {
 }
 
 .deco {
-    width: 90%;
+    width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
 }
@@ -67,7 +82,8 @@ body {
     color: #dddddd;
     display: flex;
     flex-direction: column;
-    padding: 4rem 2.5rem;
+    padding: 5rem 10rem 2rem;
+    text-align: center
 }
 
 .desc {
@@ -82,4 +98,44 @@ body {
     font-size: 2.25rem;
 
 }
+
+.logo {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #00000080;
+    color:#dddddd;
+    border-bottom: 2rem;
+    padding-bottom: 20px;
+}
+
+.team h2 {
+    color: #dddddd;
+    margin: 2rem 0;
+}
+
+.link {
+    color: #dddddd;
+    margin: 1rem 0;
+    padding: 0 2rem;
+    text-align: center;
+    text-decoration: none;
+    border: solid 2px #a7a7a7;
+    padding: 12px;
+    border-radius: 16px;
+    background-color: #0009;
+}
+
 </style>
