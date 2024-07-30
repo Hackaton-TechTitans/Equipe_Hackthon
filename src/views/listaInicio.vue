@@ -28,18 +28,19 @@ import Membros from '../info'
     align-items: center;
     margin: 1rem 0;
     background-color: #0009;
-    border: solid 2px #a7a7a7;
+    border: solid 1px #a7a7a7;
     padding: 24px;
     border-radius: 16px;
     flex-grow: 1;
     width: 75%;
     text-decoration: none;
     color: #dddddd;
+    transition: transform 0.1s;
 }
 .membro:hover{
     transform: scale(1.1);
     cursor: pointer;
-    box-shadow: 0 0 10px #4f4f4f;
+    box-shadow: 0 0 10px #3a3a3a;
 }
 .membro span {
     justify-content: center;

@@ -50,7 +50,18 @@ import Background from './components/Background.vue';
     outline-color: #d14632;
     text-decoration: none;
 }
-
+.button:active {
+    opacity: .8;
+    transform: scale(.95);
+}
+.button:hover {
+    opacity: .95;
+    box-shadow: 0 0 3px #d14632;
+    outline-color: #d14632;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+}
 html,
 body {
     font-family: 'Inter', sans-serif;
@@ -136,6 +147,15 @@ main {
     padding: 12px;
     border-radius: 16px;
     background-color: #0009;
+}
+.link:hover {
+    background-color: #000a;
+    cursor: pointer;
+    box-shadow: 0 0 10px #232323;
+}
+.link:active {
+    opacity: .8;
+    transform: scale(.95);
 }
 
 </style>
